@@ -6,7 +6,7 @@ const Section3 = () => {
       <h2 className="text-4xl lg:text-5xl font-normal leading-relaxed max-w-7xl">
         We spend our days guiding companies
         <br />
-        through our 3-step <span className="text-green-500">AI Transformation Journey</span>.
+        through our 3-step <span className="text-[#469C71]">AI Transformation Journey</span>.
       </h2>
     </div>
   )

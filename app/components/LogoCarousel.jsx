@@ -47,7 +47,7 @@ const LogoCarousel = () => {
       </div>
       <div className="text-center mt-6 sm:mt-8 md:mt-12 mb-4 sm:mb-6 md:mb-8 px-4">
         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl text-white leading-tight">
-          The best AI systems <br /> are built <span className="text-green-500">side by side.</span>
+          The best AI systems <br /> are built <span className="text-[#469C71]">side by side.</span>
         </h2>
       </div>
       <button className="mt-6 sm:mt-8 px-6 sm:px-8 md:px-12 py-3 sm:py-4 md:py-5 border-2 border-white text-white rounded-full text-2xl sm:text-3xl md:text-4xl hover:bg-white hover:text-black transition-colors duration-300">

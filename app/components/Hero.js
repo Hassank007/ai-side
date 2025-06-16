@@ -26,7 +26,7 @@ const Hero = () => {
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-4 leading-tight">
           We are not an AI
           <br />
-          <span className={`text-green-500 transition-opacity duration-500 italic ease-in-out ${fade ? 'opacity-100' : 'opacity-0'}`}>
+          <span className={`text-[#469C71] transition-opacity duration-500 italic ease-in-out ${fade ? 'opacity-100' : 'opacity-0'}`}>
             {words[currentWordIndex]}
           </span>
           <br />

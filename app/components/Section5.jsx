@@ -65,7 +65,7 @@ const Section5 = () => {
 
       <div className="w-full max-w-7xl grid grid-cols-1 md:grid-cols-3 relative z-10 gap-6 sm:gap-10">
         {/* Item 1 */}
-        <div className="flex flex-col items-start pt-4 sm:pt-8 pb-4 border-b border-green-500">
+        <div className="flex flex-col items-start pt-4 sm:pt-8 pb-4 border-b border-[#469C71]">
           <div className="text-5xl sm:text-7xl lg:text-8xl font-bold mb-2">
             <Counter target="17" suffix="M+" isVisible={isInView} />
           </div>
@@ -73,7 +73,7 @@ const Section5 = () => {
         </div>
 
         {/* Item 2 */}
-        <div className="flex flex-col items-start pt-4 sm:pt-8 pb-4 border-b border-green-500">
+        <div className="flex flex-col items-start pt-4 sm:pt-8 pb-4 border-b border-[#469C71]">
           <div className="text-5xl sm:text-7xl lg:text-8xl font-bold mb-2">
             <Counter target="435" suffix="+" isVisible={isInView} />
           </div>
@@ -81,7 +81,7 @@ const Section5 = () => {
         </div>
 
         {/* Item 3 */}
-        <div className="flex flex-col items-start pt-4 sm:pt-8 pb-4 border-b border-green-500">
+        <div className="flex flex-col items-start pt-4 sm:pt-8 pb-4 border-b border-[#469C71]">
           <div className="text-5xl sm:text-7xl lg:text-8xl font-bold mb-2">
             <Counter target="55" suffix="+" isVisible={isInView} />
           </div>
@@ -90,7 +90,7 @@ const Section5 = () => {
       </div>
 
       <div className="w-full max-w-7xl text-left pt-4 relative z-10">
-        <a href="#" className="text-green-500 hover:text-green-400 text-base sm:text-lg flex items-center group">
+        <a href="#" className="text-[#469C71] hover:text-green-400 text-base sm:text-lg flex items-center group">
           Watch our content here <span className="ml-2 transition-transform group-hover:translate-x-1">↗</span>
         </a>
       </div>
