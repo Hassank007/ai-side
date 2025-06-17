@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { FiArrowUpRight } from 'react-icons/fi';
+import ContactFormModal from './ContactFormModal';
 
 const Section6 = () => {
+  const [showContactForm, setShowContactForm] = useState(false);
+
+  const handleOpenContactForm = () => {
+    setShowContactForm(true);
+  };
+
+  const handleCloseContactForm = () => {
+    setShowContactForm(false);
+  };
+
   return (
     <div className="bg-transparent text-white min-h-screen flex flex-col justify-between p-4 md:p-10">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-5 gap-4 md:gap-0">
@@ -18,7 +29,10 @@ const Section6 = () => {
           <p className="font-bold mb-2">CONTACT</p>
           <p className="text-gray-300 mb-5">info@morningside.ai</p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <button className="bg-transparent border border-white text-white py-2 px-4 rounded-full flex items-center gap-2 hover:bg-[#469C71] hover:text-black transition-colors duration-300">
+            <button
+              onClick={handleOpenContactForm}
+              className="bg-transparent border border-white text-white py-2 px-4 rounded-full flex items-center gap-2 hover:bg-[#469C71] hover:text-black transition-colors duration-300"
+            >
               Get In Touch
               <FiArrowUpRight />
             </button>
@@ -38,6 +52,8 @@ const Section6 = () => {
           <p className="text-gray-300">YOUTUBE</p>
         </div>
       </div>
+
+      <ContactFormModal isOpen={showContactForm} onClose={handleCloseContactForm} />
     </div>
   );
 };

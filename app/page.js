@@ -14,6 +14,8 @@ export default function Page() {
   const containerRef = useRef(null)
   const [isThrottled, setIsThrottled] = useState(false)
   const [showLoader, setShowLoader] = useState(true)
+  const [activeSection, setActiveSection] = useState(0)
+  const [pauseMainScroll, setPauseMainScroll] = useState(false)
   const sections = [
     'section1',
     'section2',
@@ -30,9 +32,9 @@ export default function Page() {
     return () => clearTimeout(timer)
   }, [])
 
-  // wheel‑to‑snap logic, disabled while loader is showing
+  // wheel‑to‑snap logic, disabled while loader is showing or when pauseMainScroll is true
   useEffect(() => {
-    if (showLoader) return
+    if (showLoader || pauseMainScroll) return
 
     const container = containerRef.current
     if (!container) return
@@ -42,27 +44,53 @@ export default function Page() {
       if (isThrottled) return
 
       setIsThrottled(true)
-      const dir = e.deltaY > 0 ? 1 : -1
       const scrollTop = container.scrollTop
-      const index = Math.round(scrollTop / window.innerHeight)
+      const currentSection = Math.round(scrollTop / window.innerHeight)
+      setActiveSection(currentSection)
+      const threshold = 50
+      const dir = Math.abs(e.deltaY) > threshold ? (e.deltaY > 0 ? 1 : -1) : 0
+      if (dir === 0) {
+        setIsThrottled(false)
+        return
+      }
+      // If we're on Section4, pause main scroll and let Section4 handle it
+      if (sections[currentSection] === 'section4') {
+        setPauseMainScroll(true)
+        setIsThrottled(false)
+        return
+      }
       const nextIndex = Math.min(
-        Math.max(index + dir, 0),
+        Math.max(currentSection + dir, 0),
         sections.length - 1
       )
-      const targetY = nextIndex * window.innerHeight
-
-      setTimeout(() => {
+      if (nextIndex !== currentSection) {
+        const targetY = nextIndex * window.innerHeight
         container.scrollTo({ top: targetY, behavior: 'smooth' })
-      }, 100)
-
+      }
       setTimeout(() => {
         setIsThrottled(false)
       }, 700)
     }
-
     container.addEventListener('wheel', handleWheel, { passive: false })
     return () => container.removeEventListener('wheel', handleWheel)
-  }, [showLoader, isThrottled])
+  }, [showLoader, isThrottled, pauseMainScroll])
+
+  // Callback for Section4 to resume main scroll
+  const handleSection4Exit = (direction) => {
+    setPauseMainScroll(false)
+    const container = containerRef.current
+    if (container) {
+      let targetIndex
+      if (direction === 'up') {
+        targetIndex = sections.indexOf('section4') - 1
+      } else {
+        targetIndex = sections.indexOf('section4') + 1
+      }
+      targetIndex = Math.max(0, Math.min(sections.length - 1, targetIndex))
+      const targetY = targetIndex * window.innerHeight
+      container.scrollTo({ top: targetY, behavior: 'smooth' })
+    }
+  }
 
   return (
     <>
@@ -113,7 +141,12 @@ export default function Page() {
           <Section3 />
         </section>
         <section className="h-screen w-full snap-start" id="section4">
-          <Section4 />
+          <Section4
+            isActive={activeSection === 3}
+            onExit={handleSection4Exit}
+            pauseMainScroll={pauseMainScroll}
+            setPauseMainScroll={setPauseMainScroll}
+          />
         </section>
         <section className="h-screen w-full snap-start" id="section5">
           <Section5 />
